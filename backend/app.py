@@ -1,0 +1,22 @@
+from flask import Flask, request, jsonify
+
+app = Flask(__name__)
+@app.route("/")
+def home():
+    return "Backend is running"
+
+
+@app.route("/submit", methods=["POST"])
+def submit():
+    data = request.json
+    name = data.get("name")
+    email = data.get("email")
+
+    return jsonify({
+        "message": "Data received successfully",
+        "name": name,
+        "email": email
+    })
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=5001)
